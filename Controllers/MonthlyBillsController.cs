@@ -29,12 +29,12 @@ namespace MonthlyBillsWebAPI.Controllers
         }
 
         // GET: api/MonthlyBills/5
-        [Route("api/[controller]/{id}")]        
-        [HttpGet("{id}")]
+        [Route("api/[controller]/{Id}")]        
+        [HttpGet("{Id}")]
         
-        public async Task<ActionResult<MonthlyBills>> GetMonthlyBills(int id)
+        public async Task<ActionResult<MonthlyBills>> GetMonthlyBills(int Id)
         {
-            var monthlyBills = await _context.MonthlyBills.FindAsync(id);
+            var monthlyBills = await _context.MonthlyBills.FindAsync(Id);
 
             if (monthlyBills == null)
             {

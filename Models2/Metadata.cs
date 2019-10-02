@@ -10,7 +10,7 @@ namespace MonthlyBillsWebAPI.Models2
 {
     public class Metadata
     {
-
+        public int Id { get; set; }
         [Required]
         [StringLength(50)]
         [Display(Name = "Bill")]
