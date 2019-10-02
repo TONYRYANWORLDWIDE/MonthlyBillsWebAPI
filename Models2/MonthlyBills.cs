@@ -1,5 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 
 namespace MonthlyBillsWebAPI.Models2
 {
@@ -10,6 +14,7 @@ namespace MonthlyBillsWebAPI.Models2
         public float? Cost { get; set; }
         public string Date { get; set; }
         public string BillAlias { get; set; }
+        [JsonIgnore]
         public string UserId { get; set; }
 
         public virtual AspNetUsers User { get; set; }

@@ -24,7 +24,8 @@ namespace MonthlyBillsWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MonthlyBills>>> GetMonthlyBills()
         {
-            return await _context.MonthlyBills.ToListAsync();
+            return await _context.MonthlyBills
+                .ToListAsync();
         }
 
         // GET: api/MonthlyBills/5
