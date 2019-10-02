@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MonthlyBillsWebAPI.Models2;
-//using MonthlyBillsWebAPI.Models2.DataManager;
-//using MonthlyBillsWebAPI.Models2.DTO;
 using MonthlyBillsWebAPI.Models2.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 
 namespace MonthlyBillsWebAPI
 {
@@ -31,15 +30,7 @@ namespace MonthlyBillsWebAPI
         {
             services.AddControllers();
             services.AddDbContext<MonthlyBillsWebAppTR_dbContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:AzureDB"]));
-            //services.AddScoped<IDataRepository<MonthlyBills, MonthlyBillsDto>, MonthlyBillsDataManager>();
-            //services.AddScoped<IDataRepository<WeeklyBills, WeeklyBillsDto>, WeeklyBillsDataManager>();
-            ////services.AddScoped<IDataRepository<Publisher, PublisherDto>, PublisherDataManager>();
 
-            //services.AddMvc()
-            //    .AddJsonOptions(
-            //        options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            //    ).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            //services.AddSingleton<IConfiguration>(Configuration);
         }
 
 
@@ -47,10 +38,10 @@ namespace MonthlyBillsWebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseHttpsRedirection();
 
