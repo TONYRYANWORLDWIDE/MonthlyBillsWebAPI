@@ -16,7 +16,7 @@ namespace MonthlyBillsWebAPI.Models2
         public string BillAlias { get; set; }
         [JsonIgnore]
         public string UserId { get; set; }
-
+        [JsonIgnore]
         public virtual AspNetUsers User { get; set; }
     }
 }
