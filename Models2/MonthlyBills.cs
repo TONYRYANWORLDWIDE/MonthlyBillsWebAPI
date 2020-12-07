@@ -12,10 +12,11 @@ namespace MonthlyBillsWebAPI.Models2
         public int Id { get; set; }
         public string Bill { get; set; }
         public float? Cost { get; set; }
-        public string Date { get; set; }
+        public int Date { get; set; }
         public string BillAlias { get; set; }
         [JsonIgnore]
         public string UserId { get; set; }
+      
         [JsonIgnore]
         public virtual AspNetUsers User { get; set; }
     }
