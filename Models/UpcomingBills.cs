@@ -13,7 +13,6 @@ namespace MonthlyBillsWebAPI.Models
         public string Type { get; set; }
         public decimal? RunningTotal { get; set; }
         public string UserId { get; set; }
-
-        public virtual AspNetUsers User { get; set; }
+        public bool? Paid { get; set; }
     }
 }

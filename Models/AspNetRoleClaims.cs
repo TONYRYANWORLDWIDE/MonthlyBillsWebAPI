@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace MonthlyBillsWebAPI.Models
 {
-    public partial class AspNetUserRoles
+    public partial class AspNetRoleClaims
     {
-        public string UserId { get; set; }
+        public int Id { get; set; }
         public string RoleId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
 
         public virtual AspNetRoles2 Role { get; set; }
-        public virtual AspNetUsers User { get; set; }
     }
 }
