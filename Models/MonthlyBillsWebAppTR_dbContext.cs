@@ -504,17 +504,17 @@ namespace MonthlyBillsWebAPI.Models
 
             modelBuilder.Entity<Transactions>(entity =>
             {
-                entity.HasKey(e => new { e.TransactionId, e.AccountId, e.Date })
+                entity.HasKey(e => new { e.Transaction_Id, e.Account_Id, e.Date })
                     .HasName("PK__Transact__BC75FCA20F68E0C9");
 
                 entity.ToTable("Transactions", "CMP");
 
-                entity.Property(e => e.TransactionId)
+                entity.Property(e => e.Transaction_Id)
                     .HasColumnName("transaction_id")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.AccountId)
+                entity.Property(e => e.Account_Id)
                     .HasColumnName("account_id")
                     .HasMaxLength(55)
                     .IsUnicode(false);
@@ -523,14 +523,14 @@ namespace MonthlyBillsWebAPI.Models
                     .HasColumnName("date")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.AccountOwner)
+                entity.Property(e => e.Account_Owner)
                     .HasColumnName("account_owner")
                     .HasMaxLength(55)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Amount).HasColumnName("amount");
 
-                entity.Property(e => e.AuthorizedDate)
+                entity.Property(e => e.Authorized_Date)
                     .HasColumnName("authorized_date")
                     .HasMaxLength(55)
                     .IsUnicode(false);
@@ -545,7 +545,7 @@ namespace MonthlyBillsWebAPI.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.IsoCurrencyCode)
+                entity.Property(e => e.Iso_Currency_Code)
                     .HasColumnName("iso_currency_code")
                     .HasMaxLength(55)
                     .IsUnicode(false);
@@ -555,7 +555,7 @@ namespace MonthlyBillsWebAPI.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.MerchantName)
+                entity.Property(e => e.Merchant_Name)
                     .HasColumnName("merchant_name")
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -565,12 +565,12 @@ namespace MonthlyBillsWebAPI.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PaymentChannel)
+                entity.Property(e => e.Payment_Channel)
                     .HasColumnName("payment_channel")
                     .HasMaxLength(55)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PaymentMeta)
+                entity.Property(e => e.Payment_Meta)
                     .HasColumnName("payment_meta")
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -580,22 +580,22 @@ namespace MonthlyBillsWebAPI.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PendingTransactionId)
+                entity.Property(e => e.Pending_Transaction_Id)
                     .HasColumnName("pending_transaction_id")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TransactionCode)
+                entity.Property(e => e.Transaction_Code)
                     .HasColumnName("transaction_code")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TransactionType)
+                entity.Property(e => e.Transaction_Type)
                     .HasColumnName("transaction_type")
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UnofficialCurrencyCode)
+                entity.Property(e => e.Unofficial_Currency_Code)
                     .HasColumnName("unofficial_currency_code")
                     .HasMaxLength(255)
                     .IsUnicode(false);
