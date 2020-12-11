@@ -29,8 +29,8 @@ namespace MonthlyBillsWebAPI.Controllers
         }
 
         // GET: api/Transactions/5
-        [HttpGet("{accountid}/{transactionid}")]
-        public async Task<ActionResult<Transactions>> GetTransactions(string accountid, string transactionid)
+        [HttpGet("{transactionid}/{accountid}")]
+        public async Task<ActionResult<Transactions>> GetTransactions(string transactionid,string accountid)
         {
             var transactions = await _context.Transactions.FindAsync(transactionid,accountid);
 
@@ -45,8 +45,8 @@ namespace MonthlyBillsWebAPI.Controllers
         // PUT: api/Transactions/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{accountid}/{transactionid}")]
-        public async Task<IActionResult> PutTransactions(string transactionid,string accountid, Transactions transactions)
+        [HttpPut("{transactionid}/{accountid}")]
+        public async Task<IActionResult> PutTransactions( string transactionid, string accountid, Transactions transactions)
         {
             if (transactionid != transactions.Transaction_Id)
             {

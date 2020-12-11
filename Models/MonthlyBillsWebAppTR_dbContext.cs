@@ -40,7 +40,7 @@ namespace MonthlyBillsWebAPI.Models
         public virtual DbSet<MonthlyBills> MonthlyBills { get; set; }
         public virtual DbSet<OneOffBills> OneOffBills { get; set; }
         public virtual DbSet<Transactions> Transactions { get; set; }
-        public virtual DbSet<Transactions1> Transactions1 { get; set; }
+        public virtual DbSet<TransactionsCMP> Transactions1 { get; set; }
         public virtual DbSet<UpcomingBills> UpcomingBills { get; set; }
         public virtual DbSet<UpcomingBillsAlter> UpcomingBillsAlter { get; set; }
         public virtual DbSet<User> User { get; set; }
@@ -507,7 +507,7 @@ namespace MonthlyBillsWebAPI.Models
                 entity.HasKey(e => new { e.Transaction_Id, e.Account_Id})
                     .HasName("PK__Transact__BC75FCA20F68E0C9");
 
-                entity.ToTable("Transactions", "CMP");
+                entity.ToTable("Transactions");
 
                 entity.Property(e => e.Transaction_Id)
                     .HasColumnName("transaction_id")
@@ -601,12 +601,12 @@ namespace MonthlyBillsWebAPI.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Transactions1>(entity =>
+            modelBuilder.Entity<TransactionsCMP>(entity =>
             {
-                entity.HasKey(e => new { e.TransactionId, e.AccountId, e.Date })
+                entity.HasKey(e => new { e.TransactionId, e.AccountId })
                     .HasName("PK__Transact__BC75FCA2B80882A5");
 
-                entity.ToTable("Transactions");
+                entity.ToTable("Transactions", "CMP");
 
                 entity.Property(e => e.TransactionId)
                     .HasColumnName("transaction_id")
