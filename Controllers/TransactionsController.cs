@@ -45,10 +45,14 @@ namespace MonthlyBillsWebAPI.Controllers
         // PUT: api/Transactions/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTransactions(string id, Transactions transactions)
+        [HttpPut("{accountid}/{transactionid}")]
+        public async Task<IActionResult> PutTransactions(string transactionid,string accountid, Transactions transactions)
         {
-            if (id != transactions.Transaction_Id)
+            if (transactionid != transactions.Transaction_Id)
+            {
+                return BadRequest();
+            }
+            if (accountid != transactions.Account_Id)
             {
                 return BadRequest();
             }
@@ -61,7 +65,7 @@ namespace MonthlyBillsWebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TransactionsExists(id))
+                if (!TransactionsExists(transactionid))
                 {
                     return NotFound();
                 }
