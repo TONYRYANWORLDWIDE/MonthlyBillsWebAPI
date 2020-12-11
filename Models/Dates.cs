@@ -10,8 +10,5 @@ namespace MonthlyBillsWebAPI.Models
         public int? Day { get; set; }
         public string DayOfWeek { get; set; }
         public string DayOfMonth { get; set; }
-        public string MonthName { get; set; }
-        public int MonthNumber { get; set; }
-        public int Year { get; set; }
     }
 }

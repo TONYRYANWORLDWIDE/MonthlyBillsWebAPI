@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MonthlyBillsWebAPI.Models2.Repository
+namespace MonthlyBillsWebAPI.Models.Repository
 {
     public interface IDataRepository<TEntity, TDto>
     {

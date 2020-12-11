@@ -9,6 +9,7 @@ namespace MonthlyBillsWebAPI.Models
         public float? KeyBalance1 { get; set; }
         public DateTime? DateTime { get; set; }
         public string UserId { get; set; }
-        public float? AvailableBalance { get; set; }
+
+        public virtual AspNetUsers User { get; set; }
     }
 }

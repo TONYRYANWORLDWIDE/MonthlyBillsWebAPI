@@ -10,5 +10,7 @@ namespace MonthlyBillsWebAPI.Models
         public float? Cost { get; set; }
         public string DayOfWeek { get; set; }
         public string UserId { get; set; }
+
+        public virtual AspNetUsers User { get; set; }
     }
 }

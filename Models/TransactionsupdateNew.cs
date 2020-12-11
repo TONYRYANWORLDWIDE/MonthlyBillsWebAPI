@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MonthlyBillsWebAPI.Models2
+namespace MonthlyBillsWebAPI.Models
 {
     public partial class TransactionsupdateNew
     {

@@ -7,12 +7,12 @@ namespace MonthlyBillsWebAPI.Models
     {
         public AspNetRoles()
         {
-            AspNetUserRoles1 = new HashSet<AspNetUserRoles1>();
+            AspNetUserRoles = new HashSet<AspNetUserRoles>();
         }
 
         public string Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<AspNetUserRoles1> AspNetUserRoles1 { get; set; }
+        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
     }
 }

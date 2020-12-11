@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace MonthlyBillsWebAPI.Models2
+namespace MonthlyBillsWebAPI.Models
 {
     public class Metadata
     {

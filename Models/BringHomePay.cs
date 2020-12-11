@@ -12,5 +12,7 @@ namespace MonthlyBillsWebAPI.Models
         public string Frequency { get; set; }
         public DateTime? PickOnePayDate { get; set; }
         public string UserId { get; set; }
+
+        public virtual AspNetUsers User { get; set; }
     }
 }
