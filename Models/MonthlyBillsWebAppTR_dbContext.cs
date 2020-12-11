@@ -504,7 +504,7 @@ namespace MonthlyBillsWebAPI.Models
 
             modelBuilder.Entity<Transactions>(entity =>
             {
-                entity.HasKey(e => new { e.Transaction_Id, e.Account_Id, e.Date })
+                entity.HasKey(e => new { e.Transaction_Id, e.Account_Id})
                     .HasName("PK__Transact__BC75FCA20F68E0C9");
 
                 entity.ToTable("Transactions", "CMP");

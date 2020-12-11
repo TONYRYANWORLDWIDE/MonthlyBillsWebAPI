@@ -29,10 +29,10 @@ namespace MonthlyBillsWebAPI.Controllers
         }
 
         // GET: api/Transactions/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Transactions>> GetTransactions(string id)
+        [HttpGet("{accountid}/{transactionid}")]
+        public async Task<ActionResult<Transactions>> GetTransactions(string accountid, string transactionid)
         {
-            var transactions = await _context.Transactions.FindAsync(id);
+            var transactions = await _context.Transactions.FindAsync(transactionid,accountid);
 
             if (transactions == null)
             {
