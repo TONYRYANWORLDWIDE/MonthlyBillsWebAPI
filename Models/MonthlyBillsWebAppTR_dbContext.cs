@@ -40,7 +40,7 @@ namespace MonthlyBillsWebAPI.Models
         public virtual DbSet<MonthlyBills> MonthlyBills { get; set; }
         public virtual DbSet<OneOffBills> OneOffBills { get; set; }
         public virtual DbSet<Transactions> Transactions { get; set; }
-        public virtual DbSet<TransactionsCMP> Transactions1 { get; set; }
+        public virtual DbSet<TransactionsCMP> TransactionsCMP { get; set; }
         public virtual DbSet<UpcomingBills> UpcomingBills { get; set; }
         public virtual DbSet<UpcomingBillsAlter> UpcomingBillsAlter { get; set; }
         public virtual DbSet<User> User { get; set; }
