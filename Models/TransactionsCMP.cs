@@ -17,7 +17,8 @@ namespace MonthlyBillsWebAPI.Models
         public string Name { get; set; }
         public string Payment_Channel { get; set; }
         public string Payment_Meta { get; set; }
-        public string Pending { get; set; }
+        //public string Pending { get; set; }
+        public bool Pending { get; set; }
         public string Pending_Transaction_Id { get; set; }
         public string Transaction_Id { get; set; }
         public string Transaction_Type { get; set; }
