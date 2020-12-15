@@ -14,11 +14,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Hosting;
+using MonthlyBillsWebAPI.Services;
+
 
 namespace MonthlyBillsWebAPI
 {
     public class Startup
     {
+        //public static string ConnectionString { get; private set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,7 +32,16 @@ namespace MonthlyBillsWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<MonthlyBillsWebAppTR_dbContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:AzureDB"]));
+            services.AddDbContext<DataContext.AppContext>(options =>
+                         options.UseSqlServer(
+                             Configuration.GetConnectionString("AzureDB")));
+
+            //services.AddDbContext<MonthlyBillsWebAppTR_dbContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:AzureDB"]));
+            //Register dapper in scope    
+            services.AddScoped<IDapper, Dapperr>();
+
+            
+
 
         }
 
@@ -38,6 +50,7 @@ namespace MonthlyBillsWebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //ConnectionString = Configuration.GetConnectionString("AzureDB");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
