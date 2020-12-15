@@ -10,7 +10,7 @@ namespace MonthlyBillsWebAPI.Models
         public double? Amount { get; set; }
         public string Authorized_Date { get; set; }
         public string Category { get; set; }
-        public string CategoryId { get; set; }
+        public string Category_Id { get; set; }
         public DateTime Date { get; set; }
         public string Iso_Currency_Code { get; set; }
         public string Location { get; set; }

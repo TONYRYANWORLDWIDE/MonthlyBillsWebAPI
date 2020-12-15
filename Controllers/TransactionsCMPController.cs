@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MonthlyBillsWebAPI.Models;
+using Dapper;
+using MonthlyBillsWebAPI.Services;
+using System.Data;
 
 namespace MonthlyBillsWebAPI.Controllers
 {
@@ -14,6 +17,57 @@ namespace MonthlyBillsWebAPI.Controllers
     //[ModelVerify]
     public class TransactionsCMPController : ControllerBase
     {
+        private readonly IDapper _dapper;
+
+        public TransactionsCMPController(IDapper dapper)
+        {
+            _dapper = dapper;
+        }
+        [HttpGet]
+        //public async Task<TransactionsCMP> GetTransactions()
+        public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetTransactions()
+        {
+
+            var dbPara = new DynamicParameters();
+
+            var transactions = await Task.FromResult(_dapper.GetAll<TransactionsCMP>("[billsapi].[getCMPTransactions]",
+               dbPara, commandType: CommandType.StoredProcedure));
+            return transactions;
+        }
+
+        [HttpPut]
+        public Task<TransactionsCMP> Update(TransactionsCMP data)
+        {
+            var dbPara = new DynamicParameters();
+            dbPara.Add("account_Id", data.Account_Id);
+            dbPara.Add("account_Owner", data.Account_Owner);
+            dbPara.Add("amount", data.Amount);
+            dbPara.Add("authorized_Date", data.Authorized_Date);
+            dbPara.Add("category", data.Category);
+            dbPara.Add("category_id", data.Category_Id);
+            dbPara.Add("date", data.Date);
+            dbPara.Add("iso_Currency_Code", data.Iso_Currency_Code);
+            dbPara.Add("location", data.Location);
+            dbPara.Add("name", data.Name);
+            dbPara.Add("payment_Channel", data.Payment_Channel);
+            dbPara.Add("payment_Meta", data.Payment_Meta);
+            dbPara.Add("pending", data.Pending);
+            dbPara.Add("pending_Transaction_Id", data.Pending_Transaction_Id);
+            dbPara.Add("transaction_Id", data.Transaction_Id);
+            dbPara.Add("transaction_Type", data.Transaction_Type);
+            dbPara.Add("unofficial_Currency_Code", data.Unofficial_Currency_Code);
+            dbPara.Add("transaction_Code", data.Transaction_Code);
+            dbPara.Add("merchant_Name", data.Merchant_Name);
+
+            var updatetrans = Task.FromResult(_dapper.Update<TransactionsCMP>("[billsapi].[updateCMPTransactions]",
+            dbPara, commandType: CommandType.StoredProcedure));
+            return updatetrans;
+
+
+        }
+
+
+
         //        private readonly MonthlyBillsWebAppTR_dbContext _context;
 
         //        public TransactionsCMPController(MonthlyBillsWebAppTR_dbContext context)
