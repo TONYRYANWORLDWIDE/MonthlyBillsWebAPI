@@ -23,6 +23,7 @@ namespace MonthlyBillsWebAPI.Controllers
         {
             _dapper = dapper;
         }
+
         [HttpGet]
         //public async Task<TransactionsCMP> GetTransactions()
         public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetTransactions()
@@ -34,6 +35,32 @@ namespace MonthlyBillsWebAPI.Controllers
                dbPara, commandType: CommandType.StoredProcedure));
             return transactions;
         }
+
+        //[HttpGet(nameof(GetById))]
+        //[HttpGet("{GetById}")]
+        [HttpGet("{Account_Id}")]
+        public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetById(string Account_Id)
+        {
+            var dbPara = new DynamicParameters();
+            dbPara.Add("account_id", Account_Id);
+            var get_trans = await Task.FromResult(_dapper.GetAll<TransactionsCMP>("[billsapi].[getCMPTransactionsById]",
+                                dbPara, commandType: CommandType.StoredProcedure));
+            return get_trans;
+        }
+        [HttpGet("{Account_Id}/{Transaction_Id}")]
+        public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetById(string Account_Id,string Transaction_Id)
+        {
+
+            var dbPara = new DynamicParameters();
+            dbPara.Add("account_id", Account_Id);
+            dbPara.Add("transaction_id", Transaction_Id);
+            var get_trans = await Task.FromResult(_dapper.GetAll<TransactionsCMP>("[billsapi].[getCMPTransactionsById]",
+                                dbPara, commandType: CommandType.StoredProcedure));
+            return get_trans;
+        }
+
+
+
 
         [HttpPut]
         public Task<TransactionsCMP> Update(TransactionsCMP data)
