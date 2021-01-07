@@ -36,19 +36,13 @@ namespace MonthlyBillsWebAPI.Controllers
             return transactions;
         }
 
-        //[HttpGet(nameof(GetById))]
-        //[HttpGet("{GetById}")]
-        [HttpGet("{Account_Id}")]
-        public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetById(string Account_Id)
-        {
-            var dbPara = new DynamicParameters();
-            dbPara.Add("account_id", Account_Id);
-            var get_trans = await Task.FromResult(_dapper.GetAll<TransactionsCMP>("[billsapi].[getCMPTransactionsById]",
-                                dbPara, commandType: CommandType.StoredProcedure));
-            return get_trans;
-        }
-        [HttpGet("{Account_Id}/{Transaction_Id}")]
-        public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetById(string Account_Id,string Transaction_Id)
+        //api/TransactionsCMP/id?Transaction_Id=94Y6DE9o1Bsr3oZvKAzAiwvpgrkYVgfdE8Yyo
+        //or
+        //api/TransactionsCMP/id?@Account_id=XydAgkM6LNsVqL5a0eQKFoy6YJVn8PT4VMb9R&Transaction_Id=94Y6DE9o1Bsr3oZvKAzAiwvpgrkYVgfdE8Yyo
+        //or 
+        //api/TransactionsCMP/id? @Account_id = XydAgkM6LNsVqL5a0eQKFoy6YJVn8PT4VMb9R
+        [HttpGet("id")]
+        public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetByIdName(string Account_Id, string Transaction_Id)
         {
 
             var dbPara = new DynamicParameters();
@@ -60,7 +54,26 @@ namespace MonthlyBillsWebAPI.Controllers
         }
 
 
+        //[HttpGet("{Account_Id}")]
+        //public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetById(string Account_Id)
+        //{
+        //    var dbPara = new DynamicParameters();
+        //    dbPara.Add("account_id", Account_Id);
+        //    var get_trans = await Task.FromResult(_dapper.GetAll<TransactionsCMP>("[billsapi].[getCMPTransactionsById]",
+        //                        dbPara, commandType: CommandType.StoredProcedure));
+        //    return get_trans;
+        //}
+        //[HttpGet("{Account_Id}/{Transaction_Id}")]
+        //public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetById(string Account_Id,string Transaction_Id)
+        //{
 
+        //    var dbPara = new DynamicParameters();
+        //    dbPara.Add("account_id", Account_Id);
+        //    dbPara.Add("transaction_id", Transaction_Id);
+        //    var get_trans = await Task.FromResult(_dapper.GetAll<TransactionsCMP>("[billsapi].[getCMPTransactionsById]",
+        //                        dbPara, commandType: CommandType.StoredProcedure));
+        //    return get_trans;
+        //}
 
         [HttpPut]
         public Task<TransactionsCMP> Update(TransactionsCMP data)
@@ -89,121 +102,6 @@ namespace MonthlyBillsWebAPI.Controllers
             var updatetrans = Task.FromResult(_dapper.Update<TransactionsCMP>("[billsapi].[updateCMPTransactions]",
             dbPara, commandType: CommandType.StoredProcedure));
             return updatetrans;
-
-
         }
-
-
-
-        //        private readonly MonthlyBillsWebAppTR_dbContext _context;
-
-        //        public TransactionsCMPController(MonthlyBillsWebAppTR_dbContext context)
-        //        {
-        //            _context = context;
-        //        }
-
-        //        // GET: api/Transactions
-        //        [HttpGet]
-        //        public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetTransactions()
-        //        {
-        //            return await _context.TransactionsCMP.ToListAsync();
-        //        }
-
-        //        // GET: api/Transactions/5
-        //        [HttpGet("{transactionid}/{accountid}")]
-        //        public async Task<ActionResult<TransactionsCMP>> GetTransactions(string transactionid,string accountid)
-        //        {
-        //            var transactions = await _context.TransactionsCMP.FindAsync(transactionid,accountid);
-
-        //            if (transactions == null)
-        //            {
-        //                return NotFound();
-        //            }
-
-        //            return transactions;
-        //        }
-
-        //        // PUT: api/Transactions/5
-        //        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        //        // more details see https://aka.ms/RazorPagesCRUD.
-        //        [HttpPut("{transactionid}/{accountid}")]
-        //        public async Task<IActionResult> PutTransactions( string transactionid, string accountid, TransactionsCMP transactions)
-        //        {
-        //            if (transactionid != transactions.Transaction_Id)
-        //            {
-        //                return BadRequest();
-        //            }
-        //            if (accountid != transactions.Account_Id)
-        //            {
-        //                return BadRequest();
-        //            }
-
-        //            _context.Entry(transactions).State = EntityState.Modified;
-
-        //            try
-        //            {
-        //                await _context.SaveChangesAsync();
-        //            }
-        //            catch (DbUpdateConcurrencyException)
-        //            {
-        //                if (!TransactionsExists(transactionid))
-        //                {
-        //                    return NotFound();
-        //                }
-        //                else
-        //                {
-        //                    throw;
-        //                }
-        //            }
-
-        //            return NoContent();
-        //        }
-
-        //        // POST: api/Transactions
-        //        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        //        // more details see https://aka.ms/RazorPagesCRUD.
-        //        [HttpPost]
-        //        public async Task<ActionResult<TransactionsCMP>> PostTransactions(TransactionsCMP transactions)
-        //        {
-        //            _context.TransactionsCMP.Add(transactions);
-        //            try
-        //            {
-        //                await _context.SaveChangesAsync();
-        //            }
-        //            catch (DbUpdateException)
-        //            {
-        //                if (TransactionsExists(transactions.Transaction_Id))
-        //                {
-        //                    return Conflict();
-        //                }
-        //                else
-        //                {
-        //                    throw;
-        //                }
-        //            }
-
-        //            return CreatedAtAction("GetTransactions", new { id = transactions.Transaction_Id }, transactions);
-        //        }
-
-        //        // DELETE: api/Transactions/5
-        //        [HttpDelete("{id}")]
-        //        public async Task<ActionResult<TransactionsCMP>> DeleteTransactions(string id)
-        //        {
-        //            var transactions = await _context.TransactionsCMP.FindAsync(id);
-        //            if (transactions == null)
-        //            {
-        //                return NotFound();
-        //            }
-
-        //            _context.TransactionsCMP.Remove(transactions);
-        //            await _context.SaveChangesAsync();
-
-        //            return transactions;
-        //        }
-
-        //        private bool TransactionsExists(string id)
-        //        {
-        //            return _context.TransactionsCMP.Any(e => e.Transaction_Id == id);
-        //        }
     }
 }
