@@ -15,7 +15,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Hosting;
 using MonthlyBillsWebAPI.Services;
-
+using Swashbuckle.AspNetCore.Swagger;
+//using Swashbuckle.Swagger;
 
 namespace MonthlyBillsWebAPI
 {
@@ -40,8 +41,8 @@ namespace MonthlyBillsWebAPI
             //Register dapper in scope    
             services.AddScoped<IDapper, Dapperr>();
 
-            
 
+            services.AddSwaggerGen();
 
         }
 
@@ -56,6 +57,14 @@ namespace MonthlyBillsWebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
+                c.RoutePrefix = string.Empty;
+            });
+        
             app.UseHttpsRedirection();
 
             app.UseRouting();
