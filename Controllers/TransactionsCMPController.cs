@@ -9,6 +9,7 @@ using MonthlyBillsWebAPI.Models;
 using Dapper;
 using MonthlyBillsWebAPI.Services;
 using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MonthlyBillsWebAPI.Controllers
 {
@@ -23,7 +24,7 @@ namespace MonthlyBillsWebAPI.Controllers
         {
             _dapper = dapper;
         }
-
+        [Authorize]
         [HttpGet]
         //public async Task<TransactionsCMP> GetTransactions()
         public async Task<ActionResult<IEnumerable<TransactionsCMP>>> GetTransactions()
