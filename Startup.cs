@@ -15,7 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Hosting;
 using MonthlyBillsWebAPI.Services;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace MonthlyBillsWebAPI
 {
@@ -40,12 +40,13 @@ namespace MonthlyBillsWebAPI
             //Register dapper in scope    
             services.AddScoped<IDapper, Dapperr>();
 
-            
-
-
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.Audience = Configuration["ResourceId"];
+                    opt.Authority = $"{Configuration["Instance"]}{Configuration["TenantId"]}";
+                });
         }
-
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -60,6 +61,7 @@ namespace MonthlyBillsWebAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
